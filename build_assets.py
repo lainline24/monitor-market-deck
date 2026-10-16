@@ -108,10 +108,35 @@ v = df.assign(seg=df["인치"].astype(int).astype(str) + "인치 " + df["해상�
 g = v.groupby("seg").agg(n=("pcode", "count"), wpx=("wpx", "median"), whz=("whz", "median"), price=("최저가", "median"))
 g.round(0).sort_values("wpx").reset_index().rename(columns={"wpx": "화면정보량당가격_중앙값", "whz": "Hz당가격_중앙값", "price": "중앙가"})     .to_csv(os.path.join(EDA, "24_가성비_구간별_화면정보량당가격.csv"), index=False, encoding="utf-8-sig")
 base = g.loc["27인치 QHD IPS", "wpx"]
+# v3: 화소 수만 쓴 지수도 함께 (주사율을 곱하지 않은 기준)
+v["wp"] = v["최저가"] / v["해상도등급"].map(PX)
+gp = v.groupby("seg")["wp"].median()
+g["wp"] = gp
+data["v2"]["valuePx"] = {k: round(float(gp[k] / gp["27인치 QHD IPS"]), 2) for k in g.index}
+
+# v3: 주사율 — 크기·해상도·패널 계열을 맞춘 27인치 QHD IPS 안에서 비교
+q = df[(df["인치"] == 27) & (df["해상도등급"] == "QHD") & (df["패널계열"] == "IPS")]
+hi_hz = q[q["주사율Hz"] >= 200]
+lo_hz = q[q["주사율Hz"] < 200]
+Xh = np.column_stack([np.ones(len(non)), non["인치"], non["주사율Hz"]])
+bh, *_ = np.linalg.lstsq(Xh, non["최저가"] / 1e4, rcond=None)
+eh = non["최저가"] / 1e4 - Xh @ bh
+seh = np.sqrt(np.diag((eh @ eh / (len(non) - 3)) * np.linalg.inv(Xh.T @ Xh)))
+data["v3"] = {
+    "hz27": [{"name": " ".join(r.상품명.split()[:2]), "hz": int(r.주사율Hz), "price": int(r.최저가), "panel": r.패널}
+             for r in q.sort_values("주사율Hz").itertuples()],
+    "hzN": int(len(q)),
+    "hzR": round(float(q[["주사율Hz", "최저가"]].corr().iloc[0, 1]), 2),
+    "hzSlope100": round(float(np.polyfit(q["주사율Hz"], q["최저가"] / 1e4, 1)[0] * 100), 1),
+    "hzLo": {"n": int(len(lo_hz)), "median": int(lo_hz["최저가"].median())},
+    "hzHi": {"n": int(len(hi_hz)), "median": int(hi_hz["최저가"].median()), "fast": int((hi_hz["패널"] == "Fast IPS").sum()),
+             "min": int(hi_hz["최저가"].min()), "max": int(hi_hz["최저가"].max())},
+    "hzReg100": round(float(bh[2] * 100), 1), "hzRegSe100": round(float(seh[2] * 100), 1),
+}
 data["v2"]["valueSingle"] = [{"seg": k, "n": int(r.n), "index": round(float(r.wpx / base), 2)}
                              for k, r in g[g["n"] == 1].sort_values("wpx").iterrows()]
 g = g[g["n"] >= 2].sort_values("wpx")
-data["v2"]["value"] = [{"seg": k, "n": int(r.n), "index": round(float(r.wpx / base), 2), "wonPerHz": int(round(r.whz)),
+data["v2"]["value"] = [{"seg": k, "n": int(r.n), "index": round(float(r.wpx / base), 2), "px": data["v2"]["valuePx"][k], "wonPerHz": int(round(r.whz)),
                         "price": int(r.price)} for k, r in g.iterrows()]
 with open(os.path.join(HERE, "data.js"), "w", encoding="utf-8") as f:
     f.write("window.DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")

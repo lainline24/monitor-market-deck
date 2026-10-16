@@ -122,9 +122,9 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
 .persona.hl{border-color:var(--accent);box-shadow:0 0 0 2px rgba(59,130,246,.35)}
 
 /* limits table */
-.lim{width:100%;border-collapse:separate;border-spacing:0;margin-top:40px;font-size:23px}
+.lim{width:100%;border-collapse:separate;border-spacing:0;margin-top:30px;font-size:22px}
 .lim th{text-align:left;color:var(--fg2);font-weight:600;font-size:20px;padding:0 24px 14px}
-.lim td{padding:18px 24px;border-top:1px solid var(--line);line-height:1.45;vertical-align:top}
+.lim td{padding:14px 24px;border-top:1px solid var(--line);line-height:1.45;vertical-align:top}
 .lim td:first-child{color:var(--fg);font-weight:700;width:34%}
 .lim td:last-child{color:var(--fg2)}
 .final{margin-top:auto;display:flex;align-items:center;gap:28px;background:linear-gradient(90deg,rgba(59,130,246,.22),rgba(59,130,246,0));border-left:6px solid var(--accent);border-radius:12px;padding:26px 34px}
@@ -155,9 +155,9 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
   <div class="claims">
     <div class="card claim reveal"><div class="no">주장 ①</div><div class="t">패널이 가격대를 나눕니다</div><div class="ev">가장 싼 OLED <b>88만 원</b>이<br>IPS·VA 최고가 <b>74만 원</b>보다 비쌉니다</div><div class="go">→ 슬라이드 4~5</div></div>
     <div class="card claim reveal"><div class="no">주장 ②</div><div class="t">패널이 같으면 크기가 가격을 올립니다</div><div class="ev">OLED가 아닌 25종에서<br>1인치당 약 <b>3만 원</b> (r = 0.74)</div><div class="go">→ 슬라이드 6~8</div></div>
-    <div class="card claim reveal"><div class="no">주장 ③</div><div class="t">주사율은 가격을 거의 올리지 않습니다</div><div class="ev">OLED가 아닌 25종에서<br>주사율과 가격의 상관 <b>r = −0.08</b></div><div class="go">→ 슬라이드 9~11</div></div>
+    <div class="card claim reveal"><div class="no">주장 ③</div><div class="t">주사율도 가격을 올리지만, 폭이 작습니다</div><div class="ev">같은 27인치 QHD에서 100Hz당 약 <b>5~6만 원</b><br>OLED 프리미엄(+94만 원)의 약 6%</div><div class="go">→ 슬라이드 9~11</div></div>
   </div>
-  <div class="roadmap reveal">근거를 보여드린 뒤, <b>“크기 효과는 OLED 착시 아닌가?”</b>와 <b>“불량이 많은 것 아닌가?”</b>라는 반론도 직접 검증합니다.</div>
+  <div class="roadmap reveal">근거와 함께 <b>“크기 효과는 OLED 착시 아닌가?”</b> <b>“주사율 효과는 크기에 가려진 것 아닌가?”</b> <b>“불량이 많은 것 아닌가?”</b>라는 반론도 직접 검증합니다.</div>
 </section>
 
 <!-- 3 -->
@@ -220,9 +220,9 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
   <div class="body">
     <div class="chart reveal"><img class="figure" src="assets/charts/size_price.svg" alt="크기와 최저가 산점도, OLED가 아닌 25종의 추세선"></div>
     <div class="side">
-      <div class="card reveal"><div class="v num">r = 0.74</div><div class="k">OLED가 아닌 25종의 크기 ↔ 가격 상관계수</div></div>
+      <div class="card reveal"><div class="v num">r = 0.74</div><div class="k">OLED가 아닌 25종의 크기 ↔ 가격 상관계수<br><span style="color:var(--accent2)">r(상관계수): 1에 가까울수록 함께 움직이고, 0이면 관계가 없습니다</span></div></div>
       <div class="card reveal"><div class="v num">약 15만 원</div><div class="k">27인치 → 32인치로 갈 때 추세선 기준 가격 차이 (5인치 × 3만 원)</div></div>
-      <div class="card reveal"><div class="k" style="margin:0">파란 점(OLED)은 같은 크기에서도 추세선보다 훨씬 위에 있습니다. 그래서 추세선은 OLED를 빼고 그었습니다.</div></div>
+      <div class="card reveal"><div class="k" style="margin:0">파란 점(OLED)은 같은 크기에서도 추세선보다 훨씬 위에 있습니다. 그래서 추세선(점들의 흐름을 가장 잘 나타내는 직선)은 OLED를 빼고 그었습니다.</div></div>
     </div>
   </div>
   <div class="src">matplotlib · eda/00_상품_정제데이터.csv (30종)</div>
@@ -235,12 +235,12 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
   <div class="video-wrap">
     <video id="r2Video" src="assets/video/r2.mp4" poster="assets/video/r2_poster.jpg" muted playsinline preload="auto"></video>
     <div class="side" style="width:auto;flex:1">
-      <div class="card reveal"><div class="v num" style="color:var(--accent2)">0.75 <small>vs 0.35</small></div><div class="k">가격 차이 설명력(R²): 패널(OLED 여부)만 vs 크기만</div></div>
+      <div class="card reveal"><div class="v num" style="color:var(--accent2)">0.75 <small>vs 0.35</small></div><div class="k">설명력(R²): 패널(OLED 여부)만 vs 크기만<br><span style="color:var(--accent2)">R²: 30종의 가격 차이 중 몇 %를 그 변수로 설명하나 (0.75 = 75%)</span></div></div>
       <div class="card reveal"><div class="v num">0.84</div><div class="k">패널 + 크기를 함께 넣으면</div></div>
-      <div class="card reveal"><div class="v num" style="white-space:nowrap">0.59 → 0.74</div><div class="k">OLED 5종을 뺐을 때 크기 ↔ 가격 상관계수</div></div>
+      <div class="card reveal"><div class="v num" style="white-space:nowrap;font-size:42px">0.59 → 0.74</div><div class="k">OLED 5종을 뺐을 때 크기 ↔ 가격 상관계수</div></div>
     </div>
   </div>
-  <div class="src">manim 애니메이션 · 단순 선형회귀(최저가 ~ 크기 + OLED 여부), 30종 · 상관은 인과가 아닙니다</div>
+  <div class="src">manim 애니메이션 · 회귀분석(여러 변수로 가격을 설명하는 식: 최저가 ~ 크기 + OLED 여부), 30종 · 상관은 인과가 아닙니다</div>
 </section>
 
 <!-- 8 -->
@@ -259,19 +259,17 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
 
 <!-- 9 -->
 <section class="slide" data-anim="hz">
-  <div class="kicker"><b>근거 ③</b>주사율</div>
-  <h2>주사율은 <em>가격을 거의 올리지 않습니다</em></h2>
+  <div class="kicker check"><b>근거 ③ · 반론 검증</b>크기를 맞추고 다시 보면</div>
+  <h2>같은 27인치 QHD라면 <em>주사율도 가격을 올리지만, 폭은 작습니다</em></h2>
   <div class="body">
-    <div class="chart" style="display:flex;gap:40px;align-items:center">
-      <svg id="hzDonut" viewBox="0 0 520 520" width="500" height="500"></svg>
-      <svg id="hzBars" viewBox="0 0 640 460" style="flex:1;height:460px"></svg>
-    </div>
+    <div class="chart"><svg id="hzScatter" viewBox="0 0 1180 620" width="100%" height="100%"></svg></div>
     <div class="side">
-      <div class="card reveal"><div class="v num" style="color:var(--accent2)">r = −0.08</div><div class="k">OLED가 아닌 25종에서 주사율 ↔ 가격 상관. 사실상 관계가 없습니다</div></div>
-      <div class="card reveal"><div class="v num">25~27만 원</div><div class="k">260Hz 27인치 QHD 3종의 가격. 144Hz 이하 중앙가(18만 원)와 큰 차이가 없음</div></div>
+      <div class="card reveal"><div class="v num" style="color:var(--accent2)">+5.6만 원</div><div class="k">100Hz 오를 때 가격 (27인치 QHD IPS 12종, r = 0.64)</div></div>
+      <div class="card reveal"><div class="v num">20만 <small>vs 25만 원</small></div><div class="k">중앙가(가운데 값): 200Hz 미만 5종 vs 이상 7종</div></div>
+      <div class="card reveal"><div class="k" style="margin:0">처음에 썼던 30종 단순 상관(r = −0.08)은 싼 27인치가 고주사율, 비싼 32인치가 저주사율이라 효과가 가려진 숫자였습니다.</div></div>
     </div>
   </div>
-  <div class="src">eda/05_주사율구간별_가격크기.csv · 145~180Hz 구간 중앙가가 높은 건 32인치 이상 대형이 많아서(평균 32.6인치)</div>
+  <div class="src">크기·해상도·패널 계열을 맞춘 27인치 QHD IPS 12종 · 200Hz 이상 7종 중 5종이 Fast IPS라 패널 세부 종류 차이가 일부 섞여 있습니다 · 참고: 30종 중 21종이 144Hz 초과</div>
 </section>
 
 <!-- 10 -->
@@ -291,19 +289,19 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
 <!-- 11 -->
 <section class="slide" data-anim="value">
   <div class="kicker"><b>가성비 계산</b>같은 돈으로 얼마나 받나</div>
-  <h2>같은 돈으로 화면 정보량이 가장 많은 건 <em>27인치 QHD IPS</em>입니다</h2>
+  <h2>화소 수로 보든, 주사율까지 보든 <em>27인치 QHD IPS</em>가 가장 쌉니다</h2>
   <div class="body">
     <div class="chart" style="display:flex;flex-direction:column;gap:20px">
-      <div class="formula reveal"><b>화면 정보량</b> = 해상도(화소 수) × 주사율 &nbsp;·&nbsp; <b>가격 지수</b> = 화면 정보량 1단위당 가격(구간 중앙값), 27인치 QHD IPS = 1.00 &nbsp;·&nbsp; 낮을수록 가성비 좋음</div>
-      <svg id="valueChart" viewBox="0 0 1180 470" width="100%" style="flex:1"></svg>
+      <div class="formula reveal"><b>제가 정의한 지수입니다.</b> 가격 지수 = 1단위당 가격(구간 중앙값), 27인치 QHD IPS = 1.00, 낮을수록 쌈 &nbsp;·&nbsp; <b>화소 수 기준</b>: 문서·작업용 &nbsp;·&nbsp; <b>화소 수 × 주사율 기준</b>: 게임용</div>
+      <svg id="valueChart" viewBox="0 0 1180 540" width="100%" style="flex:1"></svg>
     </div>
     <div class="side">
-      <div class="card reveal"><div class="v num">1.31배</div><div class="k">32인치 4K IPS는 같은 화면 정보량에 31% 더 냅니다</div></div>
-      <div class="card reveal"><div class="v num">949원 <small>vs 1,166원</small></div><div class="k">1Hz당 가격만 보면 FHD가 더 쌉니다. 해상도까지 따지면 QHD가 앞섭니다</div></div>
+      <div class="card reveal"><div class="v num">1위 유지</div><div class="k">두 기준 모두 27인치 QHD IPS가 가장 낮습니다. 주사율을 곱해서 생긴 결과가 아닙니다</div></div>
+      <div class="card reveal"><div class="v num">1.03배</div><div class="k">화소 수만 보면 27인치 FHD도 거의 같습니다. 문서용이면 FHD도 충분히 합리적입니다</div></div>
       <div class="card reveal"><div class="k" style="margin:0">27인치 4K IPS 1종(0.86배)처럼 표본이 1종뿐인 구간은 비교에서 뺐습니다.</div></div>
     </div>
   </div>
-  <div class="src">eda/24_가성비_구간별_화면정보량당가격.csv · 표본 2종 이상 구간만 표시</div>
+  <div class="src">eda/24_가성비_구간별_화면정보량당가격.csv · 표본 2종 이상 구간만 표시 · 참고: 1Hz당 가격은 FHD 949원, QHD 1,166원</div>
 </section>
 
 <!-- 12 -->
@@ -330,7 +328,8 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
       <div class="legend" id="defLegend" style="flex:1"></div>
     </div>
     <div class="side">
-      <div class="card reveal"><div class="v num" style="color:var(--bad)">6 <small>/ 269건 (2.2%)</small></div><div class="k">실제로 패널 불량(불량화소·화면 줄)을 겪었다는 리뷰</div></div>
+      <div class="card reveal"><div class="v num" style="color:var(--bad)">6건 <small>(2.2%)</small></div><div class="k">좁게 세면: 패널 불량(불량화소·화면 줄)을 겪은 리뷰 / 269건</div></div>
+      <div class="card reveal"><div class="v num" style="color:#FCA5A5">14건 <small>(5.2%)</small></div><div class="k">넓게 세면: 빛샘 5건·부품 불량 3건까지 포함 / 269건. 어느 쪽이든 걱정보다 적습니다</div></div>
       <div class="card reveal"><div class="k" style="margin:0">구매자는 불량을 <b style="color:var(--fg)">겪기보다 걱정합니다.</b> 그래서 ‘무결점’ 정책과 불량화소 테스트가 리뷰에 자주 나옵니다.</div></div>
     </div>
   </div>
@@ -356,11 +355,11 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
   <div class="kicker">그래서, 어떻게 고르나</div>
   <h2>모니터는 <em>패널 → 크기 → 해상도·주사율</em> 순서로 고르세요</h2>
   <div class="flow">
-    <div class="step first reveal"><div class="n">STEP 1 · 패널</div><div class="q">예산이 88만 원을 넘나요?</div><div class="a">넘으면 <b>OLED</b>를 검토하고, 아니면 <b>IPS</b>에서 고릅니다. 가격대를 가장 크게 가르는 결정입니다.</div><div class="data">근거: 설명력 R² 0.75 · OLED 최저 88만 원</div></div>
+    <div class="step first reveal"><div class="n">STEP 1 · 패널</div><div class="q">예산이 88만 원을 넘나요?</div><div class="a">넘으면 <b>OLED</b>를 검토하고, 아니면 <b>IPS</b>에서 고릅니다. 가격대를 가장 크게 가르는 결정입니다.</div><div class="data">근거: 설명력 R² 0.75(가격 차이의 75%) · OLED 최저 88만 원</div></div>
     <div class="arrow reveal"><svg viewBox="0 0 70 40"><path d="M2 20 H58" stroke="#3B82F6" stroke-width="4" fill="none"/><path d="M50 8 L66 20 L50 32" stroke="#3B82F6" stroke-width="4" fill="none" stroke-linejoin="round"/></svg></div>
     <div class="step reveal"><div class="n">STEP 2 · 크기</div><div class="q">책상과 용도에 맞는 크기는?</div><div class="a">같은 패널이면 1인치당 약 <b>3만 원</b>. 27인치 → 32인치는 약 <b>15만 원</b> 차이입니다.</div><div class="data">근거: OLED가 아닌 25종, r = 0.74</div></div>
     <div class="arrow reveal"><svg viewBox="0 0 70 40"><path d="M2 20 H58" stroke="#3B82F6" stroke-width="4" fill="none"/><path d="M50 8 L66 20 L50 32" stroke="#3B82F6" stroke-width="4" fill="none" stroke-linejoin="round"/></svg></div>
-    <div class="step reveal"><div class="n">STEP 3 · 해상도·주사율</div><div class="q">해상도는 크기 따라, 주사율은 높게</div><div class="a">27인치는 <b>QHD</b>, 32인치는 <b>4K</b>. 주사율은 가격을 거의 올리지 않으니 <b>200Hz 이상</b>도 부담이 적습니다.</div><div class="data">근거: 크기×해상도 교차표 · 주사율 r = −0.08</div></div>
+    <div class="step reveal"><div class="n">STEP 3 · 해상도·주사율</div><div class="q">해상도는 크기 따라, 주사율은 용도 따라</div><div class="a">27인치는 <b>QHD</b>, 32인치는 <b>4K</b>. 게임이면 약 <b>5~6만 원</b>을 더 내고 <b>200Hz 이상</b>, 문서용이면 <b>120~144Hz</b>로 충분합니다.</div><div class="data">근거: 크기×해상도 교차표 · 27인치 QHD 12종 r = 0.64</div></div>
   </div>
 </section>
 
@@ -369,12 +368,12 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
   <div class="kicker">예산별 출발점</div>
   <h2>이 순서를 따르면, 대부분은 <em>20만 원대 27인치 QHD</em>에서 시작합니다</h2>
   <div class="personas">
-    <div class="persona reveal"><div class="img" style="background-image:url(assets/img/office.jpg)"></div><div class="c"><div class="tag">사무 · 입문</div><div class="spec">24~27인치 FHD IPS<br>120~144Hz</div><div class="price num">11~14만 원</div><div class="why">가장 저렴합니다. 다만 화면 정보량 대비 가격은 QHD보다 1.45배 높습니다.</div></div></div>
-    <div class="persona hl reveal"><div class="img" style="background-image:url(assets/img/gamer.jpg)"></div><div class="c"><div class="tag">게임 · 대부분의 출발점 ★</div><div class="spec">27인치 QHD Fast IPS<br>200~260Hz</div><div class="price num">19~27만 원</div><div class="why">화면 정보량 대비 가격 지수 1.00으로 가장 낮고, 인기 상위권과도 겹칩니다.</div></div></div>
-    <div class="persona reveal"><div class="img" style="background-image:url(assets/img/creator.jpg)"></div><div class="c"><div class="tag">작업 · 콘솔</div><div class="spec">32인치 4K Fast IPS<br>144~160Hz</div><div class="price num">50~74만 원</div><div class="why">크기와 4K가 필요할 때. 같은 정보량에 1.31배를 냅니다.</div></div></div>
-    <div class="persona reveal"><div class="img" style="background-image:url(assets/img/oled.jpg)"></div><div class="c"><div class="tag">하이엔드</div><div class="spec">32인치 4K QD-OLED<br>240Hz</div><div class="price num">88~175만 원</div><div class="why">만점 리뷰 94%. 지수 1.89배로 가장 비싸고, 리뷰 26%가 번인을 걱정합니다.</div></div></div>
+    <div class="persona reveal"><div class="img" style="background-image:url(assets/img/office.jpg)"></div><div class="c"><div class="tag">사무 · 입문</div><div class="spec">24~27인치 FHD IPS<br>120~144Hz</div><div class="price num">11~14만 원</div><div class="why">가장 저렴합니다. 화소 수 기준으론 QHD와 비슷(1.03배)하고, 주사율까지 보면 1.45배입니다.</div></div></div>
+    <div class="persona hl reveal"><div class="img" style="background-image:url(assets/img/gamer.jpg)"></div><div class="c"><div class="tag">게임 · 대부분의 출발점 ★</div><div class="spec">27인치 QHD IPS<br>게임이면 200Hz 이상</div><div class="price num">19~29만 원</div><div class="why">가격 지수 1.00(27인치 QHD IPS 12종)으로 두 기준 모두 가장 낮고, 인기 상위권과도 겹칩니다.</div></div></div>
+    <div class="persona reveal"><div class="img" style="background-image:url(assets/img/creator.jpg)"></div><div class="c"><div class="tag">작업 · 콘솔</div><div class="spec">32인치 4K Fast IPS<br>144~160Hz</div><div class="price num">50~74만 원</div><div class="why">크기와 4K가 필요할 때. 가격 지수 1.13~1.31배입니다.</div></div></div>
+    <div class="persona reveal"><div class="img" style="background-image:url(assets/img/oled.jpg)"></div><div class="c"><div class="tag">하이엔드</div><div class="spec">32인치 4K QD-OLED<br>240Hz</div><div class="price num">88~175만 원</div><div class="why">만점 리뷰 94%. 지수 1.89~2.46배로 가장 비싸고, 리뷰 26%가 번인을 걱정합니다.</div></div></div>
   </div>
-  <div class="src">가격 = 30종 중 해당 조건 제품의 최저~최고 표시가 · 이미지: Google Flow(Nano Banana) 생성</div>
+  <div class="src">가격 = 30종 중 해당 조건 제품의 최저~최고 표시가 (게임 카드는 27인치 QHD IPS 중 200Hz 이상 7종) · 이미지: Google Flow(Nano Banana) 생성</div>
 </section>
 
 <!-- 17 -->
@@ -385,6 +384,7 @@ svg text{font-family:Pretendard,"Malgun Gothic",sans-serif}
     <tr><th>예상 반론</th><th>이 발표의 대응</th></tr>
     <tr><td>30종은 너무 적다</td><td>방향만 주장합니다. 모든 비율을 ‘30종 중 몇 종’으로 썼고, 시장점유율이라고 하지 않았습니다.</td></tr>
     <tr><td>OLED는 5종뿐이다</td><td>“OLED가 더 비싸다”는 방향은 확실하지만(최저가가 IPS 최고가보다 높음), +94만 원이라는 크기는 오차가 클 수 있습니다.</td></tr>
+    <tr><td>주사율 효과는 크기에 가려진 것 아닌가?</td><td>맞습니다. 그래서 27인치 QHD IPS 12종 안에서 다시 계산했고, 100Hz당 약 5~6만 원이었습니다. 처음의 “거의 안 올린다”는 결론을 고쳤습니다.</td></tr>
     <tr><td>상관은 인과가 아니다</td><td>“크기가 가격을 만든다”가 아니라 “함께 움직인다”까지만 말합니다.</td></tr>
     <tr><td>리뷰 분류가 주관적이다</td><td>59건 분류 결과를 저장소 data 폴더에 CSV로 공개했습니다. 누구나 다시 확인할 수 있습니다.</td></tr>
   </table>
@@ -499,7 +499,12 @@ const ANIM = {
     anime({targets: [refLine, refText, gapText], opacity: [0, 1], duration: 600, delay: 1900});
     anime({targets: gapRect, opacity: [0, .12], duration: 800, delay: 2200});
   },
-  video: s => { reveal(s, 600); const v = s.querySelector('video'); v.currentTime = 0; const p = v.play(); if (p) p.catch(() => {}); },
+  video: s => {
+    reveal(s, 600);
+    const v = s.querySelector('video');
+    const start = () => { v.currentTime = 0; const p = v.play(); if (p) p.catch(() => {}); };
+    if (v.readyState >= 3) start(); else v.addEventListener('canplaythrough', start, {once: true});
+  },
   bands: s => {
     reveal(s, 900);
     const svg = document.getElementById('bandChart'); svg.innerHTML = '';
@@ -525,55 +530,68 @@ const ANIM = {
     anime({targets: svg.querySelectorAll('.tot'), opacity: [0, 1], duration: 500, delay: anime.stagger(80, {start: 900})});
   },
   hz: s => {
-    reveal(s, 800);
-    const d = document.getElementById('hzDonut'); d.innerHTML = '';
-    const total = D.hz.reduce((a, r) => a + r.n, 0), R = 190, cx = 260, cy = 260, circ = 2 * Math.PI * R;
-    const shades = [C.muted, '#1E40AF', '#3B82F6', '#93C5FD'];
-    el('circle', {cx, cy, r: R, fill: 'none', stroke: C.grid, 'stroke-width': 56}, d);
-    let off = 0;
-    D.hz.forEach((r, i) => {
-      const len = r.n / total * circ;
-      el('circle', {cx, cy, r: R, fill: 'none', stroke: shades[i], 'stroke-width': 56, 'stroke-dasharray': `0 ${circ}`, 'data-len': len, transform: `rotate(-90 ${cx} ${cy})`, class: 'arc', 'stroke-dashoffset': -off}, d);
-      off += len;
+    reveal(s, 900);
+    const svg = document.getElementById('hzScatter'); svg.innerHTML = '';
+    const H = D.v3, rows = H.hz27, x0 = 110, x1 = 1120, y0 = 40, y1 = 540;
+    const hmin = 100, hmax = 280, pmin = 100000, pmax = 340000;
+    const sx = v => x0 + (v - hmin) / (hmax - hmin) * (x1 - x0), sy = v => y1 - (v - pmin) / (pmax - pmin) * (y1 - y0);
+    [100000, 150000, 200000, 250000, 300000].forEach(t => {
+      el('line', {x1: x0, x2: x1, y1: sy(t), y2: sy(t), stroke: C.grid, 'stroke-width': 2}, svg);
+      el('text', {x: x0 - 14, y: sy(t) + 7, 'text-anchor': 'end', fill: C.fg2, 'font-size': 20}, svg, `${man(t)}만`);
     });
-    const pct = el('text', {x: cx, y: cy + 14, 'text-anchor': 'middle', fill: C.fg, 'font-size': 96, 'font-weight': 800}, d, '0');
-    el('text', {x: cx, y: cy + 62, 'text-anchor': 'middle', fill: C.fg2, 'font-size': 24}, d, `/ ${total}종이 144Hz 초과`);
-    d.querySelectorAll('.arc').forEach((a, i) => {
-      const len = +a.dataset.len, o = {l: 0};
-      anime({targets: o, l: len, duration: 700, delay: 300 + i * 450, easing: 'easeInOutQuad', update: () => a.setAttribute('stroke-dasharray', `${o.l} ${circ}`)});
+    [120, 144, 180, 200, 240, 260].forEach(t => el('text', {x: sx(t), y: y1 + 34, 'text-anchor': 'middle', fill: C.fg2, 'font-size': 20}, svg, `${t}Hz`));
+    el('text', {x: (x0 + x1) / 2, y: y1 + 70, 'text-anchor': 'middle', fill: C.fg2, 'font-size': 20}, svg, '주사율 · 27인치 QHD IPS 12종만 (크기·해상도·패널 계열 동일)');
+    const cut = el('line', {x1: sx(200), x2: sx(200), y1: y0, y2: y1, stroke: C.line, 'stroke-width': 2, 'stroke-dasharray': '6 6'}, svg);
+    // 구간 중앙값 가로선
+    [[H.hzLo, 100, 199, '200Hz 미만 중앙값'], [H.hzHi, 200, 270, '200Hz 이상 중앙값']].forEach(([g, a, b, lab], i) => {
+      el('line', {x1: sx(a), x2: sx(b), y1: sy(g.median), y2: sy(g.median), stroke: C.warn, 'stroke-width': 3, opacity: 0, class: 'med'}, svg);
+      el('text', {x: i ? sx(b) : sx(138), y: sy(g.median) + 34, 'text-anchor': i ? 'end' : 'start', fill: C.warn, 'font-size': 20, 'font-weight': 600, opacity: 0, class: 'med'}, svg, `${lab} ${man(g.median)}만 원 (${g.n}종)`);
     });
-    const o = {v: 0};
-    anime({targets: o, v: D.over144, round: 1, duration: 1800, delay: 700, easing: 'easeOutExpo', update: () => pct.textContent = o.v});
-    const b = document.getElementById('hzBars'); b.innerHTML = '';
-    el('text', {x: 0, y: 30, fill: C.fg2, 'font-size': 22}, b, '주사율 구간별 상품 수 · 중앙가');
-    const mxn = Math.max(...D.hz.map(r => r.n));
-    D.hz.forEach((r, i) => {
-      const y = 70 + i * 96;
-      el('rect', {x: 0, y: y + 4, width: 22, height: 22, rx: 5, fill: shades[i]}, b);
-      el('text', {x: 34, y: y + 23, fill: C.fg, 'font-size': 25, 'font-weight': 600}, b, r.band);
-      el('rect', {x: 0, y: y + 38, width: 0, height: 30, rx: 6, fill: shades[i], class: 'hb', 'data-w': r.n / mxn * 380}, b);
-      el('text', {x: 400, y: y + 62, fill: C.fg, 'font-size': 23}, b, `${r.n}종 · ${man(r.median)}만 원`);
+    // 추세선 (최소제곱)
+    const n = rows.length, mxh = rows.reduce((a, r) => a + r.hz, 0) / n, mxp = rows.reduce((a, r) => a + r.price, 0) / n;
+    const slope = rows.reduce((a, r) => a + (r.hz - mxh) * (r.price - mxp), 0) / rows.reduce((a, r) => a + (r.hz - mxh) ** 2, 0);
+    const fy = h => mxp + slope * (h - mxh);
+    const tl = el('line', {x1: sx(110), y1: sy(fy(110)), x2: sx(275), y2: sy(fy(275)), stroke: C.accent2, 'stroke-width': 3, 'stroke-dasharray': '1000', 'stroke-dashoffset': '1000'}, svg);
+    el('text', {x: sx(275) - 4, y: sy(fy(275)) - 16, 'text-anchor': 'end', fill: C.accent2, 'font-size': 21, 'font-weight': 700, opacity: 0, class: 'tlab'}, svg, `추세선: 100Hz당 +${H.hzSlope100}만 원`);
+    const seen = {};
+    rows.forEach(r => {
+      const k = r.hz + '_' + r.price; seen[k] = (seen[k] || 0) + 1;
+      const dx = (seen[k] - 1) * 18;
+      el('circle', {cx: sx(r.hz) + dx, cy: sy(r.price), r: 0, fill: r.panel === 'Fast IPS' ? C.accent : C.muted, stroke: '#0B1220', 'stroke-width': 3, class: 'pt'}, svg);
     });
-    anime({targets: b.querySelectorAll('.hb'), width: e => +e.dataset.w, duration: 900, delay: anime.stagger(150, {start: 500}), easing: 'easeOutExpo'});
+    [['Fast IPS', C.accent], ['그 밖의 IPS', C.muted]].forEach(([lab, col], i) => {
+      el('circle', {cx: x0 + 24 + i * 190, cy: y0 + 6, r: 9, fill: col}, svg);
+      el('text', {x: x0 + 42 + i * 190, y: y0 + 13, fill: C.fg2, 'font-size': 20}, svg, lab);
+    });
+    anime({targets: svg.querySelectorAll('.pt'), r: [0, 12], duration: 600, delay: anime.stagger(70, {start: 300}), easing: 'easeOutBack'});
+    anime({targets: tl, strokeDashoffset: [1000, 0], duration: 1100, delay: 1300, easing: 'easeInOutQuad'});
+    anime({targets: svg.querySelectorAll('.tlab'), opacity: [0, 1], duration: 500, delay: 2200});
+    anime({targets: svg.querySelectorAll('.med'), opacity: [0, 1], duration: 600, delay: anime.stagger(200, {start: 2500})});
   },
   value: s => {
     reveal(s, 300);
     const svg = document.getElementById('valueChart'); svg.innerHTML = '';
-    const rows = V.value, x0 = 300, W = 640, mx = 2.0, step = 82;
+    const rows = V.value, x0 = 300, W = 560, mx = 2.6, step = 84;
     const sx = v => x0 + v / mx * W;
-    [0, 0.5, 1, 1.5, 2].forEach(t => {
-      el('line', {x1: sx(t), x2: sx(t), y1: 10, y2: 20 + rows.length * step, stroke: t === 1 ? C.warn : C.grid, 'stroke-width': t === 1 ? 2.5 : 2, 'stroke-dasharray': t === 1 ? '8 6' : ''}, svg);
-      el('text', {x: sx(t), y: 50 + rows.length * step, 'text-anchor': 'middle', fill: t === 1 ? C.warn : C.fg2, 'font-size': 21}, svg, t === 1 ? '1.00 (기준)' : t.toFixed(1));
+    [['화소 수 기준 (문서·작업)', C.muted, 0], ['화소 수 × 주사율 기준 (게임)', C.accent, 330]].forEach(([lab, col, dx]) => {
+      el('rect', {x: x0 + dx, y: 0, width: 22, height: 22, rx: 5, fill: col}, svg);
+      el('text', {x: x0 + dx + 32, y: 19, fill: C.fg2, 'font-size': 20}, svg, lab);
+    });
+    [0, 1, 2].forEach(t => {
+      el('line', {x1: sx(t), x2: sx(t), y1: 36, y2: 46 + rows.length * step, stroke: t === 1 ? C.warn : C.grid, 'stroke-width': t === 1 ? 2.5 : 2, 'stroke-dasharray': t === 1 ? '8 6' : ''}, svg);
+      el('text', {x: sx(t), y: 74 + rows.length * step, 'text-anchor': 'middle', fill: t === 1 ? C.warn : C.fg2, 'font-size': 20}, svg, t === 1 ? '1.00 (기준)' : t.toFixed(1));
     });
     rows.forEach((r, i) => {
-      const y = 22 + i * step, best = i === 0;
-      el('text', {x: x0 - 20, y: y + 30, 'text-anchor': 'end', fill: best ? C.fg : C.fg2, 'font-size': 25, 'font-weight': best ? 750 : 500}, svg, r.seg);
+      const y = 46 + i * step, best = i === 0;
+      el('text', {x: x0 - 20, y: y + 30, 'text-anchor': 'end', fill: best ? C.fg : C.fg2, 'font-size': 24, 'font-weight': best ? 750 : 500}, svg, r.seg);
       el('text', {x: x0 - 20, y: y + 56, 'text-anchor': 'end', fill: '#6B7A95', 'font-size': 18}, svg, `${r.n}종 · 중앙가 ${man(r.price)}만 원`);
-      el('rect', {x: x0, y: y + 12, width: 0, height: 40, rx: 8, fill: best ? C.accent : (r.seg.includes('OLED') ? '#475569' : C.muted), class: 'vb', 'data-w': r.index / mx * W}, svg);
-      el('text', {x: sx(r.index) + 14, y: y + 41, fill: best ? C.accent2 : C.fg, 'font-size': 26, 'font-weight': 800, class: 'vl', opacity: 0}, svg, `${r.index.toFixed(2)}배`);
+      [[r.px, C.muted, 6], [r.index, C.accent, 38]].forEach(([v, col, dy]) => {
+        el('rect', {x: x0, y: y + dy, width: 0, height: 26, rx: 6, fill: col, opacity: best ? 1 : .75, class: 'vb', 'data-w': v / mx * W}, svg);
+        el('text', {x: sx(v) + 12, y: y + dy + 21, fill: best ? C.fg : C.fg2, 'font-size': 21, 'font-weight': best ? 800 : 600, class: 'vl', opacity: 0}, svg, `${v.toFixed(2)}`);
+      });
     });
-    anime({targets: svg.querySelectorAll('.vb'), width: e => +e.dataset.w, duration: 900, delay: anime.stagger(120, {start: 500}), easing: 'easeOutExpo'});
-    anime({targets: svg.querySelectorAll('.vl'), opacity: [0, 1], duration: 400, delay: anime.stagger(120, {start: 1000})});
+    anime({targets: svg.querySelectorAll('.vb'), width: e => +e.dataset.w, duration: 900, delay: anime.stagger(70, {start: 500}), easing: 'easeOutExpo'});
+    anime({targets: svg.querySelectorAll('.vl'), opacity: [0, 1], duration: 400, delay: anime.stagger(70, {start: 1000})});
   },
   top: s => {
     reveal(s, 500);
@@ -667,6 +685,7 @@ const ANIM = {
   },
 };
 
+document.querySelectorAll('video').forEach(v => v.load());
 const start = parseInt(location.hash.slice(1)) - 1;
 go(isNaN(start) ? 0 : start);
 </script>

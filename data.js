@@ -360,6 +360,20 @@ window.DATA = {
     "n": 6
    }
   ],
+  "valuePx": {
+   "24인치 FHD IPS": 1.18,
+   "27인치 4K IPS": 0.74,
+   "27인치 FHD IPS": 1.03,
+   "27인치 QHD IPS": 1.0,
+   "32인치 4K IPS": 1.13,
+   "32인치 4K OLED": 2.46,
+   "32인치 QHD IPS": 1.49,
+   "32인치 QHD VA": 1.29,
+   "34인치 Ultra WQHD IPS": 1.24,
+   "39인치 WUHD OLED": 3.01,
+   "40인치 Ultra WQHD IPS": 1.5,
+   "40인치 WUHD IPS": 1.12
+  },
   "valueSingle": [
    {
     "seg": "27인치 4K IPS",
@@ -402,6 +416,7 @@ window.DATA = {
     "seg": "27인치 QHD IPS",
     "n": 12,
     "index": 1.0,
+    "px": 1.0,
     "wonPerHz": 1166,
     "price": 215520
    },
@@ -409,6 +424,7 @@ window.DATA = {
     "seg": "32인치 4K IPS",
     "n": 3,
     "index": 1.31,
+    "px": 1.13,
     "wonPerHz": 3431,
     "price": 549000
    },
@@ -416,6 +432,7 @@ window.DATA = {
     "seg": "27인치 FHD IPS",
     "n": 2,
     "index": 1.45,
+    "px": 1.03,
     "wonPerHz": 949,
     "price": 125395
    },
@@ -423,6 +440,7 @@ window.DATA = {
     "seg": "32인치 QHD IPS",
     "n": 2,
     "index": 1.45,
+    "px": 1.49,
     "wonPerHz": 1690,
     "price": 321670
    },
@@ -430,9 +448,102 @@ window.DATA = {
     "seg": "32인치 4K OLED",
     "n": 4,
     "index": 1.89,
+    "px": 2.46,
     "wonPerHz": 4967,
     "price": 1192165
    }
   ]
+ },
+ "v3": {
+  "hz27": [
+   {
+    "name": "크로스오버 27QD166CM",
+    "hz": 120,
+    "price": 179000,
+    "panel": "IPS"
+   },
+   {
+    "name": "크로스오버 27LGQ175CM",
+    "hz": 120,
+    "price": 199000,
+    "panel": "Nano-IPS Black"
+   },
+   {
+    "name": "크로스오버 27LGQ175CM",
+    "hz": 120,
+    "price": 199000,
+    "panel": "Nano-IPS Black"
+   },
+   {
+    "name": "크로스오버 27QW129DM",
+    "hz": 120,
+    "price": 149000,
+    "panel": "IPS"
+   },
+   {
+    "name": "삼성전자 오디세이",
+    "hz": 180,
+    "price": 305000,
+    "panel": "IPS"
+   },
+   {
+    "name": "MSI MAG",
+    "hz": 200,
+    "price": 202040,
+    "panel": "Rapid IPS"
+   },
+   {
+    "name": "크로스오버 279QA9200",
+    "hz": 200,
+    "price": 189000,
+    "panel": "Fast IPS"
+   },
+   {
+    "name": "LG전자 울트라기어",
+    "hz": 200,
+    "price": 294720,
+    "panel": "IPS"
+   },
+   {
+    "name": "알파스캔 AOC",
+    "hz": 210,
+    "price": 229000,
+    "panel": "Fast IPS"
+   },
+   {
+    "name": "알파스캔 AOC",
+    "hz": 260,
+    "price": 269000,
+    "panel": "Fast IPS"
+   },
+   {
+    "name": "필립스 에브니아",
+    "hz": 260,
+    "price": 269000,
+    "panel": "Fast IPS"
+   },
+   {
+    "name": "필립스 에브니아",
+    "hz": 260,
+    "price": 249000,
+    "panel": "Fast IPS"
+   }
+  ],
+  "hzN": 12,
+  "hzR": 0.64,
+  "hzSlope100": 5.6,
+  "hzLo": {
+   "n": 5,
+   "median": 199000
+  },
+  "hzHi": {
+   "n": 7,
+   "median": 249000,
+   "fast": 5,
+   "min": 189000,
+   "max": 294720
+  },
+  "hzReg100": 1.6,
+  "hzRegSe100": 5.5
  }
 };
