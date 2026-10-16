@@ -323,5 +323,116 @@ window.DATA = {
  "perfectReviews": 237,
  "lowReviews": 8,
  "over144": 21,
- "year2026": 15
+ "year2026": 15,
+ "v2": {
+  "r2": {
+   "size": 0.35,
+   "panel": 0.75,
+   "both": 0.84
+  },
+  "oledPremium": 94,
+  "sizeSlopeBoth": 3.6,
+  "corrAll": 0.59,
+  "corrNonOled": 0.74,
+  "corrHzNonOled": -0.08,
+  "slopeNonOled": 3.0,
+  "nNonOled": 25,
+  "nOled": 5,
+  "defect": [
+   {
+    "label": "불량 없음 확인",
+    "n": 38
+   },
+   {
+    "label": "무관(오탐)",
+    "n": 7
+   },
+   {
+    "label": "빛샘 단점 언급",
+    "n": 5
+   },
+   {
+    "label": "기타 부품 불량 경험",
+    "n": 3
+   },
+   {
+    "label": "패널 불량 경험",
+    "n": 6
+   }
+  ],
+  "valueSingle": [
+   {
+    "seg": "27인치 4K IPS",
+    "n": 1,
+    "index": 0.86
+   },
+   {
+    "seg": "34인치 Ultra WQHD IPS",
+    "n": 1,
+    "index": 1.15
+   },
+   {
+    "seg": "32인치 QHD VA",
+    "n": 1,
+    "index": 1.45
+   },
+   {
+    "seg": "24인치 FHD IPS",
+    "n": 1,
+    "index": 1.51
+   },
+   {
+    "seg": "40인치 WUHD IPS",
+    "n": 1,
+    "index": 1.73
+   },
+   {
+    "seg": "40인치 Ultra WQHD IPS",
+    "n": 1,
+    "index": 1.79
+   },
+   {
+    "seg": "39인치 WUHD OLED",
+    "n": 1,
+    "index": 3.37
+   }
+  ],
+  "value": [
+   {
+    "seg": "27인치 QHD IPS",
+    "n": 12,
+    "index": 1.0,
+    "wonPerHz": 1166,
+    "price": 215520
+   },
+   {
+    "seg": "32인치 4K IPS",
+    "n": 3,
+    "index": 1.31,
+    "wonPerHz": 3431,
+    "price": 549000
+   },
+   {
+    "seg": "27인치 FHD IPS",
+    "n": 2,
+    "index": 1.45,
+    "wonPerHz": 949,
+    "price": 125395
+   },
+   {
+    "seg": "32인치 QHD IPS",
+    "n": 2,
+    "index": 1.45,
+    "wonPerHz": 1690,
+    "price": 321670
+   },
+   {
+    "seg": "32인치 4K OLED",
+    "n": 4,
+    "index": 1.89,
+    "wonPerHz": 4967,
+    "price": 1192165
+   }
+  ]
+ }
 };

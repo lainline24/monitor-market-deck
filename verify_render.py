@@ -8,6 +8,7 @@ from playwright.sync_api import sync_playwright
 
 url, out = sys.argv[1], sys.argv[2]
 mobile = "--mobile" in sys.argv
+nofont = "--nofont" in sys.argv  # 웹폰트를 막아 대체 글꼴(맑은 고딕 등)로 렌더링
 os.makedirs(out, exist_ok=True)
 
 CHECK_JS = """
@@ -39,6 +40,15 @@ CHECK_JS = """
   s.querySelectorAll('svg').forEach(sv => { const b = sv.getBoundingClientRect(); sv.querySelectorAll('text').forEach(t => { const r = t.getBoundingClientRect(); if (r.width && (r.right > b.right + 2 || r.left < b.left - 2 || r.top < b.top - 2 || r.bottom > b.bottom + 2)) issues.push('svg-text-clipped: ' + t.textContent); }); });
   s.querySelectorAll('img').forEach(i => { if (!i.complete || !i.naturalWidth) issues.push('broken-img: ' + i.src); });
   s.querySelectorAll('video').forEach(v => { if (v.readyState < 2) issues.push('video-not-ready: ' + v.currentSrc); });
+  // 제목·카드 문장의 마지막 줄이 2글자 이하로 떨어지는 '고아 줄' 검사
+  s.querySelectorAll('h1, h2, .claim .t, .flow .q, .final .m').forEach(h => {
+    const rg = document.createRange(); rg.selectNodeContents(h);
+    const rects = [...rg.getClientRects()].filter(r => r.width > 1);
+    const lines = {}; rects.forEach(r => { const k = Math.round(r.top / 8); lines[k] = lines[k] || {l: r.left, r: r.right}; lines[k].l = Math.min(lines[k].l, r.left); lines[k].r = Math.max(lines[k].r, r.right); });
+    const ks = Object.keys(lines).map(Number).sort((a, b) => a - b);
+    if (ks.length > 1) { const last = lines[ks[ks.length - 1]], fs = parseFloat(getComputedStyle(h).fontSize) * scale; if ((last.r - last.l) < fs * 2.6) issues.push(`orphan-line(${ks.length}줄): ${h.textContent.trim().slice(-12)}`); }
+    if (h.tagName === 'H2' && ks.length > 2) issues.push(`title-3lines: ${h.textContent.trim().slice(0, 30)}`);
+  });
   return {title: (s.querySelector('h1,h2')||{}).textContent, issues};
 }
 """
@@ -50,8 +60,11 @@ with sync_playwright() as p:
     page = browser.new_page(viewport=vp, device_scale_factor=1)
     page.on("console", lambda m: report["console"].append(f"{m.type}: {m.text}") if m.type in ("error", "warning") else None)
     page.on("pageerror", lambda e: report["console"].append(f"pageerror: {e}"))
-    page.on("requestfailed", lambda r: report["failed"].append(f"{r.url} {r.failure}"))
+    page.on("requestfailed", lambda r: None if (nofont or r.url.endswith(".mp4")) else report["failed"].append(f"{r.url} {r.failure}"))
     page.on("response", lambda r: report["failed"].append(f"{r.status} {r.url}") if r.status >= 400 else None)
+    if nofont:
+        page.route("**/*pretendard*", lambda r: r.abort())
+        page.route("**/*.woff*", lambda r: r.abort())
     page.goto(url + "#1", wait_until="networkidle")
     n = page.evaluate("document.querySelectorAll('.slide').length")
     for i in range(n):
@@ -61,7 +74,7 @@ with sync_playwright() as p:
         res = page.evaluate(CHECK_JS)
         res["slide"] = i + 1
         report["slides"].append(res)
-        page.screenshot(path=os.path.join(out, f"{'m' if mobile else 'd'}{i + 1:02d}.png"))
+        page.screenshot(path=os.path.join(out, f"{'m' if mobile else ('f' if nofont else 'd')}{i + 1:02d}.png"))
     browser.close()
 
 bad = 0

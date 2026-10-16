@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -71,6 +72,47 @@ data = {
     "over144": int((df["주사율Hz"] > 144).sum()),
     "year2026": int((df["등록연도"] == 2026).sum()),
 }
+
+# ---------- v2: 피드백 반영 분석 ----------
+yv = df["최저가"] / 10000
+oled = (df["패널계열"] == "OLED").astype(float)
+
+
+def r2(cols):
+    X = np.column_stack([np.ones(len(df))] + cols)
+    beta = np.linalg.lstsq(X, yv, rcond=None)[0]
+    e = yv - X @ beta
+    return float(1 - (e ** 2).sum() / ((yv - yv.mean()) ** 2).sum()), beta
+
+
+non = df[df["패널계열"] != "OLED"]
+r2_both, beta_both = r2([df["인치"], oled])
+data["v2"] = {
+    "r2": {"size": round(r2([df["인치"]])[0], 2), "panel": round(r2([oled])[0], 2), "both": round(r2_both, 2)},
+    "oledPremium": round(float(beta_both[2])),
+    "sizeSlopeBoth": round(float(beta_both[1]), 1),
+    "corrAll": round(float(df[["최저가", "인치"]].corr().iloc[0, 1]), 2),
+    "corrNonOled": round(float(non[["최저가", "인치"]].corr().iloc[0, 1]), 2),
+    "corrHzNonOled": round(float(non[["최저가", "주사율Hz"]].corr().iloc[0, 1]), 2),
+    "slopeNonOled": round(float(np.polyfit(non["인치"], non["최저가"] / 10000, 1)[0]), 1),
+    "nNonOled": int(len(non)), "nOled": int(oled.sum()),
+}
+cls = pd.read_csv(os.path.join(EDA, "23_불량키워드리뷰_수동분류.csv"), encoding="utf-8-sig")
+order = ["불량 없음 확인", "무관(오탐)", "빛샘 단점 언급", "기타 부품 불량 경험", "패널 불량 경험"]
+data["v2"]["defect"] = [{"label": k, "n": int((cls["분류"] == k).sum())} for k in order]
+# 화면 정보량(해상도 화소수 x 주사율) 대비 가격 — 표본 2종 이상 구간
+PX = {"FHD": 1920 * 1080, "QHD": 2560 * 1440, "4K UHD": 3840 * 2160, "Ultra WQHD": 3440 * 1440, "WUHD": 5120 * 2160}
+v = df.assign(seg=df["인치"].astype(int).astype(str) + "인치 " + df["해상도등급"].str.replace(" UHD", "") + " " + df["패널계열"],
+              wpx=df["최저가"] / (df["해상도등급"].map(PX) * df["주사율Hz"] / 1e9),
+              whz=df["최저가"] / df["주사율Hz"])
+g = v.groupby("seg").agg(n=("pcode", "count"), wpx=("wpx", "median"), whz=("whz", "median"), price=("최저가", "median"))
+g.round(0).sort_values("wpx").reset_index().rename(columns={"wpx": "화면정보량당가격_중앙값", "whz": "Hz당가격_중앙값", "price": "중앙가"})     .to_csv(os.path.join(EDA, "24_가성비_구간별_화면정보량당가격.csv"), index=False, encoding="utf-8-sig")
+base = g.loc["27인치 QHD IPS", "wpx"]
+data["v2"]["valueSingle"] = [{"seg": k, "n": int(r.n), "index": round(float(r.wpx / base), 2)}
+                             for k, r in g[g["n"] == 1].sort_values("wpx").iterrows()]
+g = g[g["n"] >= 2].sort_values("wpx")
+data["v2"]["value"] = [{"seg": k, "n": int(r.n), "index": round(float(r.wpx / base), 2), "wonPerHz": int(round(r.whz)),
+                        "price": int(r.price)} for k, r in g.iterrows()]
 with open(os.path.join(HERE, "data.js"), "w", encoding="utf-8") as f:
     f.write("window.DATA = " + json.dumps(data, ensure_ascii=False, indent=1) + ";\n")
 with open(os.path.join(HERE, "data.json"), "w", encoding="utf-8") as f:
@@ -86,17 +128,15 @@ for fam, color, z in [("IPS", "#94A3B8", 2), ("VA", "#CBD5E1", 2), ("OLED", ACCE
     s = d[d["패널계열"] == fam]
     ax.scatter(s["x"], s["최저가"] / 10000, s=140 if fam == "OLED" else 90, color=color, alpha=0.9,
                edgecolor=BG, linewidth=1.2, zorder=z, label={"IPS": "IPS 계열", "VA": "VA", "OLED": "OLED 계열"}[fam])
-import numpy as np
-m, b = np.polyfit(d["인치"], d["최저가"] / 10000, 1)
-xs = np.array([23, 41])
-ax.plot(xs, m * xs + b, color="#F59E0B", lw=2, ls="--", alpha=0.8, zorder=1)
-ax.text(40.6, m * 40.6 + b + 8, f"추세선: 1인치당 +{m:.0f}만 원", color="#F59E0B", ha="right", fontsize=14)
-hi, lo = d.loc[d["최저가"].idxmax()], d.loc[d["최저가"].idxmin()]
-ax.annotate(f"{' '.join(hi['상품명'].split()[:2])}  {man(hi['최저가'])}만 원", (hi["x"], hi["최저가"] / 10000),
-            xytext=(-16, 0), textcoords="offset points", ha="right", va="center", fontsize=14, color=FG)
-ax.annotate(f"최저가 {' '.join(lo['상품명'].split()[:2])}\n{man(lo['최저가'])}만 원", (lo["x"], lo["최저가"] / 10000),
-            xytext=(24.2, 62), textcoords="data", ha="left", va="center", fontsize=14, color=FG,
-            arrowprops=dict(arrowstyle="-", color="#9CA3AF", lw=1.2))
+nd = d[d["패널계열"] != "OLED"]
+m, b = np.polyfit(nd["인치"], nd["최저가"] / 10000, 1)
+xs = np.array([23.5, 40.8])
+ax.plot(xs, m * xs + b, color="#F59E0B", lw=2.5, ls="--", alpha=0.9, zorder=1)
+ax.text(36.6, 112, f"IPS·VA {len(nd)}종 추세선\n1인치당 +{m:.1f}만 원 (r = {data['v2']['corrNonOled']:.2f})",
+        color="#F59E0B", ha="center", va="center", fontsize=15, linespacing=1.4)
+od = d[d["패널계열"] == "OLED"]
+ax.text(od["x"].min() - 0.4, 160, "OLED 5종은 같은 크기에서도\n추세선보다 훨씬 위", ha="right", va="center",
+        fontsize=15, color="#60A5FA", linespacing=1.4)
 ax.set_xlabel("화면 크기 (인치)")
 ax.set_ylabel("최저가 (만 원)")
 ax.set_xticks([24, 27, 32, 34, 39, 40])
